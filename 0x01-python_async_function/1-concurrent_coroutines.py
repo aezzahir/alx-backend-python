@@ -1,20 +1,19 @@
 #!/usr/bin/env python3
 """
-Module for the wait_n function.
+1. Let's execute multiple coroutines at the same time with async
 """
 import asyncio
+import random
 from typing import List
-from . import wait_random
+wait_random = __import__('0-basic_async_syntax').wait_random
 
 
 async def wait_n(n: int, max_delay: int) -> List[float]:
     """
-    Asynchronous coroutine that takes in two integer arguments,
-    `n` and `max_delay`.
-    It returns a list of all the delays (float values) sorted
-    in ascending order.
+    a takes in 2 int arguments (in this order): n and max_delay.
+    You will spawn wait_random n times with the specified max_delay.
     """
-    delays: List[float] = []
-    for _ in range(n):
-        delays.append(await wait_random(max_delay))
-    return sorted(delays)
+    listOfDelays: List[float] = []
+    for i in range(n):
+        listOfDelays.append(await wait_random(max_delay))
+    return sorted(listOfDelays)
